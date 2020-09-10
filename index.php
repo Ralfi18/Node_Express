@@ -1,7 +1,7 @@
 var express = require("express");
 var app = express();
 var handleBars = require("express3-handlebars").create({ defaultLayout: "main" });
-
+/*
 var fortunes = [
 	"Conquer your fears or they will conquer you.",
 	"Rivers need springs.",
@@ -9,6 +9,9 @@ var fortunes = [
 	"You will have a pleasant surprise.",
 	"Whenever possible, keep it simple.",
 ];
+*/
+
+var fortune = require("./lib/fortune.js");
 
 app.engine("handlebars", handleBars.engine);
 app.set("view engine", "handlebars");
@@ -26,9 +29,9 @@ app.get("/", function(req, res){
 app.get("/about", function(req, res){
 	//res.type("text/plain");
 	//res.send("Demo App - About Page");
-	var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+// 	var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
 
-	res.render("about", { "fortune": randomFortune });
+	res.render("about", { "fortune": fortune.getFortune() });
 });
 
 // 404 Page
